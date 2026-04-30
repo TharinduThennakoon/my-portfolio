@@ -26,7 +26,6 @@ const projects = [
       "A robust enterprise-grade system to manage employee records, attendance, and payroll with a powerful Java backend and intuitive UI.",
     tech: ["Java", "Spring Boot", "MySQL"],
     icon: "👥",
-    color: "#ED8B00",
   },
   {
     title: "Ice Cream Agency Web App",
@@ -34,7 +33,6 @@ const projects = [
       "A full-featured e-commerce platform for an ice cream agency — built with the MERN stack with real-time order tracking and admin dashboard.",
     tech: ["MongoDB", "Express.js", "React", "Node.js"],
     icon: "🍦",
-    color: "#00D9FF",
   },
   {
     title: "Smart Campus",
@@ -42,7 +40,6 @@ const projects = [
       "An intelligent campus management solution using Spring Boot microservices, enabling students and staff to manage resources, schedules, and facilities seamlessly.",
     tech: ["Spring Boot", "Java", "MySQL"],
     icon: "🏫",
-    color: "#6DB33F",
   },
   {
     title: "Online Boarding Management System",
@@ -50,7 +47,6 @@ const projects = [
       "A comprehensive digital platform connecting boarding house owners and tenants — featuring room listings, booking management, and payment tracking.",
     tech: ["MongoDB", "Express.js", "React", "Node.js"],
     icon: "🏠",
-    color: "#7F52FF",
   },
   {
     title: "Coffee Ordering App",
@@ -58,7 +54,6 @@ const projects = [
       "A sleek Android application that streamlines coffee ordering for cafés — built natively in Kotlin with real-time order status and a beautiful UI.",
     tech: ["Kotlin", "Android Studio", "Firebase"],
     icon: "☕",
-    color: "#A0522D",
   },
   {
     title: "Daily Habits Tracker",
@@ -66,14 +61,17 @@ const projects = [
       "A motivational Android app to help users build and maintain positive daily habits — with streak tracking, reminders, and progress analytics.",
     tech: ["Kotlin", "Android Studio", "Room DB"],
     icon: "✅",
-    color: "#3DDC84",
   },
 ];
 
+const DownloadIcon = () => (
+  <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+    <path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17"/>
+  </svg>
+);
+
 export default function Portfolio() {
   const [scrollY, setScrollY] = useState(0);
-  const [activeSection, setActiveSection] = useState("home");
-  const [menuOpen, setMenuOpen] = useState(false);
   const [typed, setTyped] = useState("");
   const roles = ["Full Stack Developer", "Android Developer", "IT Undergraduate", "Problem Solver"];
   const roleRef = useRef(0);
@@ -113,7 +111,6 @@ export default function Portfolio() {
 
   const scrollTo = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-    setMenuOpen(false);
   };
 
   return (
@@ -128,16 +125,11 @@ export default function Portfolio() {
         html { scroll-behavior: smooth; }
 
         .nav-link {
-          color: #8892b0;
-          font-size: 0.85rem;
-          font-weight: 500;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
-          cursor: pointer;
-          transition: color 0.3s;
-          background: none;
-          border: none;
-          padding: 0;
+          color: #8892b0; font-size: 0.85rem; font-weight: 500;
+          letter-spacing: 0.08em; text-transform: uppercase;
+          cursor: pointer; transition: color 0.3s;
+          background: none; border: none; padding: 0;
+          font-family: 'DM Sans', sans-serif;
         }
         .nav-link:hover { color: #00d9ff; }
 
@@ -147,14 +139,11 @@ export default function Portfolio() {
           color: #00d9ff;
           padding: 0.75rem 2rem;
           border-radius: 4px;
-          font-size: 0.85rem;
-          font-weight: 600;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          cursor: pointer;
-          transition: all 0.3s;
-          text-decoration: none;
-          display: inline-block;
+          font-size: 0.85rem; font-weight: 600;
+          letter-spacing: 0.1em; text-transform: uppercase;
+          cursor: pointer; transition: all 0.3s;
+          text-decoration: none; display: inline-flex;
+          align-items: center; gap: 0.4rem;
           font-family: 'DM Sans', sans-serif;
         }
         .glow-btn:hover {
@@ -162,23 +151,43 @@ export default function Portfolio() {
           box-shadow: 0 0 20px rgba(0,217,255,0.3);
         }
 
-        .skill-chip {
-          background: rgba(0,217,255,0.05);
-          border: 1px solid rgba(0,217,255,0.15);
-          border-radius: 8px;
-          padding: 0.9rem 1rem;
-          display: flex;
-          align-items: center;
-          gap: 0.6rem;
-          font-size: 0.85rem;
-          font-weight: 500;
-          color: #a8b2d8;
-          transition: all 0.3s;
-          cursor: default;
+        .cv-btn {
+          background: transparent;
+          border: 1.5px solid rgba(255,255,255,0.15);
+          color: #8892b0;
+          padding: 0.75rem 1.8rem;
+          border-radius: 4px;
+          font-size: 0.85rem; font-weight: 600;
+          letter-spacing: 0.1em; text-transform: uppercase;
+          cursor: pointer; transition: all 0.3s;
+          text-decoration: none; display: inline-flex;
+          align-items: center; gap: 0.5rem;
+          font-family: 'DM Sans', sans-serif;
+          position: relative; overflow: hidden;
         }
-        .skill-chip:hover {
+        .cv-btn::before {
+          content: '';
+          position: absolute; inset: 0;
+          background: linear-gradient(135deg, rgba(0,217,255,0.08), transparent);
+          opacity: 0; transition: opacity 0.3s;
+        }
+        .cv-btn:hover {
           border-color: #00d9ff;
           color: #00d9ff;
+          box-shadow: 0 0 20px rgba(0,217,255,0.15);
+        }
+        .cv-btn:hover::before { opacity: 1; }
+
+        .skill-chip {
+          background: rgba(0,217,255,0.04);
+          border: 1px solid rgba(0,217,255,0.12);
+          border-radius: 8px; padding: 0.9rem 1rem;
+          display: flex; align-items: center; gap: 0.6rem;
+          font-size: 0.85rem; font-weight: 500; color: #a8b2d8;
+          transition: all 0.3s; cursor: default;
+        }
+        .skill-chip:hover {
+          border-color: #00d9ff; color: #00d9ff;
           background: rgba(0,217,255,0.08);
           transform: translateY(-2px);
         }
@@ -186,20 +195,14 @@ export default function Portfolio() {
         .project-card {
           background: rgba(255,255,255,0.02);
           border: 1px solid rgba(255,255,255,0.06);
-          border-radius: 16px;
-          padding: 2rem;
-          transition: all 0.4s;
-          position: relative;
-          overflow: hidden;
+          border-radius: 16px; padding: 2rem;
+          transition: all 0.4s; position: relative; overflow: hidden;
         }
         .project-card::before {
-          content: '';
-          position: absolute;
-          top: 0; left: 0;
-          width: 100%; height: 2px;
+          content: ''; position: absolute;
+          top: 0; left: 0; width: 100%; height: 2px;
           background: linear-gradient(90deg, transparent, #00d9ff, transparent);
-          opacity: 0;
-          transition: opacity 0.4s;
+          opacity: 0; transition: opacity 0.4s;
         }
         .project-card:hover {
           border-color: rgba(0,217,255,0.2);
@@ -211,76 +214,48 @@ export default function Portfolio() {
         .tech-tag {
           background: rgba(0,217,255,0.08);
           border: 1px solid rgba(0,217,255,0.2);
-          color: #00d9ff;
-          padding: 0.2rem 0.6rem;
-          border-radius: 4px;
-          font-size: 0.72rem;
-          font-weight: 600;
-          letter-spacing: 0.05em;
+          color: #00d9ff; padding: 0.2rem 0.6rem;
+          border-radius: 4px; font-size: 0.72rem;
+          font-weight: 600; letter-spacing: 0.05em;
         }
 
         .social-btn {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          padding: 0.7rem 1.2rem;
-          border-radius: 8px;
+          display: flex; align-items: center; gap: 0.5rem;
+          padding: 0.7rem 1.2rem; border-radius: 8px;
           border: 1px solid rgba(255,255,255,0.1);
           background: rgba(255,255,255,0.03);
-          color: #8892b0;
-          font-size: 0.85rem;
-          font-weight: 500;
-          cursor: pointer;
-          transition: all 0.3s;
-          text-decoration: none;
+          color: #8892b0; font-size: 0.85rem; font-weight: 500;
+          cursor: pointer; transition: all 0.3s; text-decoration: none;
         }
         .social-btn:hover {
-          border-color: #00d9ff;
-          color: #00d9ff;
+          border-color: #00d9ff; color: #00d9ff;
           background: rgba(0,217,255,0.07);
         }
 
         .section-title {
           font-family: 'Syne', sans-serif;
           font-size: clamp(1.8rem, 4vw, 2.8rem);
-          font-weight: 800;
-          color: #ccd6f6;
-          letter-spacing: -0.02em;
-          line-height: 1.1;
+          font-weight: 800; color: #ccd6f6;
+          letter-spacing: -0.02em; line-height: 1.1;
         }
         .accent { color: #00d9ff; }
 
-        .grid-2 {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-          gap: 1.5rem;
-        }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.8rem; }
+        .dot-pattern { background-image: radial-gradient(rgba(0,217,255,0.07) 1px, transparent 1px); background-size: 30px 30px; }
 
-        .skills-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-          gap: 0.8rem;
-        }
-
-        .dot-pattern {
-          background-image: radial-gradient(rgba(0,217,255,0.08) 1px, transparent 1px);
-          background-size: 30px 30px;
-        }
-
-        @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(30px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+        @keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 0 rgba(0,217,255,0); } 50% { box-shadow: 0 0 18px rgba(0,217,255,0.25); } }
 
         .cursor { animation: blink 1s infinite; color: #00d9ff; }
-
         .fade-up { animation: fadeUp 0.8s ease both; }
         .delay-1 { animation-delay: 0.1s; }
         .delay-2 { animation-delay: 0.2s; }
         .delay-3 { animation-delay: 0.3s; }
         .delay-4 { animation-delay: 0.4s; }
         .delay-5 { animation-delay: 0.5s; }
+        .pulse-glow { animation: pulse-glow 2.5s ease-in-out infinite; }
 
         .noise {
           position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -289,22 +264,20 @@ export default function Portfolio() {
         }
 
         @media (max-width: 768px) {
-          .hero-grid { flex-direction: column; }
-          .hide-mobile { display: none; }
+          .hide-mobile { display: none !important; }
+          .about-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+          .hero-buttons { flex-direction: column !important; align-items: flex-start !important; }
         }
       `}</style>
 
       <div className="noise" />
-
-      {/* Ambient background glows */}
       <div style={{ position: "fixed", top: "10%", left: "5%", width: 500, height: 500, background: "radial-gradient(circle, rgba(0,217,255,0.04) 0%, transparent 70%)", pointerEvents: "none", zIndex: 0 }} />
       <div style={{ position: "fixed", bottom: "10%", right: "5%", width: 400, height: 400, background: "radial-gradient(circle, rgba(127,82,255,0.04) 0%, transparent 70%)", pointerEvents: "none", zIndex: 0 }} />
 
-      {/* NAVBAR */}
+      {/* ── NAVBAR ── */}
       <nav style={{
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 1000,
-        padding: "1.2rem 2rem",
-        display: "flex", alignItems: "center", justifyContent: "space-between",
+        padding: "1.2rem 2rem", display: "flex", alignItems: "center", justifyContent: "space-between",
         background: scrollY > 50 ? "rgba(7,8,15,0.95)" : "transparent",
         backdropFilter: scrollY > 50 ? "blur(20px)" : "none",
         borderBottom: scrollY > 50 ? "1px solid rgba(255,255,255,0.05)" : "none",
@@ -318,36 +291,42 @@ export default function Portfolio() {
             <button key={s} className="nav-link" onClick={() => scrollTo(s)}>{s}</button>
           ))}
         </div>
-        <a href="mailto:tharindu16thennakoon@gmail.com" className="glow-btn hide-mobile" style={{ fontSize: "0.75rem", padding: "0.5rem 1.2rem" }}>
-          Hire Me
+        <a href="/resume.pdf" download="Tharindu_Thennakoon_Resume.pdf" className="cv-btn hide-mobile pulse-glow" style={{ fontSize: "0.75rem", padding: "0.5rem 1.2rem" }}>
+          <DownloadIcon /> Resume
         </a>
       </nav>
 
-      {/* HERO */}
+      {/* ── HERO ── */}
       <section id="home" style={{ minHeight: "100vh", display: "flex", alignItems: "center", padding: "8rem 2rem 4rem", position: "relative", zIndex: 1 }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", width: "100%" }}>
           <div className="fade-up">
-            <span style={{ color: "#00d9ff", fontSize: "0.85rem", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase" }}>
-              Hey there, I'm
-            </span>
+            <span style={{ color: "#00d9ff", fontSize: "0.85rem", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase" }}>Hey there, I'm</span>
           </div>
-
           <h1 className="fade-up delay-1" style={{ fontFamily: "Syne, sans-serif", fontSize: "clamp(3rem, 8vw, 6rem)", fontWeight: 800, color: "#ccd6f6", lineHeight: 1.05, letterSpacing: "-0.03em", marginTop: "0.5rem" }}>
-            Tharindu<br />
-            <span style={{ color: "#00d9ff" }}>Thennakoon</span>
+            Tharindu<br /><span style={{ color: "#00d9ff" }}>Thennakoon</span>
           </h1>
-
-          <div className="fade-up delay-2" style={{ fontSize: "clamp(1rem, 2.5vw, 1.4rem)", color: "#8892b0", marginTop: "1rem", fontWeight: 400, minHeight: "2rem" }}>
+          <div className="fade-up delay-2" style={{ fontSize: "clamp(1rem, 2.5vw, 1.4rem)", color: "#8892b0", marginTop: "1rem", minHeight: "2rem" }}>
             {typed}<span className="cursor">|</span>
           </div>
-
           <p className="fade-up delay-3" style={{ maxWidth: 560, color: "#8892b0", lineHeight: 1.8, marginTop: "1.5rem", fontSize: "0.95rem" }}>
             An IT undergraduate at <span style={{ color: "#ccd6f6", fontWeight: 600 }}>SLIIT</span> with a passion for building scalable digital solutions. From enterprise Java backends to sleek Kotlin mobile apps and full MERN stack platforms — I turn complex problems into clean, functional software.
           </p>
 
-          <div className="fade-up delay-4" style={{ display: "flex", gap: "1rem", marginTop: "2.5rem", flexWrap: "wrap" }}>
+          {/* HERO BUTTONS */}
+          <div className="fade-up delay-4 hero-buttons" style={{ display: "flex", gap: "1rem", marginTop: "2.5rem", flexWrap: "wrap", alignItems: "center" }}>
             <button className="glow-btn" onClick={() => scrollTo("projects")}>View My Work</button>
-            <a href="mailto:tharindu16thennakoon@gmail.com" className="glow-btn" style={{ borderColor: "rgba(255,255,255,0.2)", color: "#8892b0" }}>
+
+            {/* ⬇️ RESUME DOWNLOAD BUTTON */}
+            <a
+              href="/resume.pdf"
+              download="Tharindu_Thennakoon_Resume.pdf"
+              className="cv-btn pulse-glow"
+            >
+              <DownloadIcon />
+              Download CV
+            </a>
+
+            <a href="mailto:tharindu16thennakoon@gmail.com" className="cv-btn">
               Get In Touch
             </a>
           </div>
@@ -363,8 +342,6 @@ export default function Portfolio() {
             </a>
           </div>
         </div>
-
-        {/* Decorative line */}
         <div style={{ position: "absolute", right: "5%", top: "50%", transform: "translateY(-50%)", display: "flex", flexDirection: "column", gap: "0.3rem", alignItems: "center" }} className="hide-mobile">
           <div style={{ width: 1, height: 80, background: "linear-gradient(to bottom, transparent, #00d9ff)" }} />
           <div style={{ color: "#00d9ff", fontSize: "0.7rem", letterSpacing: "0.2em", writingMode: "vertical-rl", textTransform: "uppercase" }}>Scroll</div>
@@ -372,24 +349,25 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* ABOUT */}
+      {/* ── ABOUT ── */}
       <section id="about" style={{ padding: "6rem 2rem", position: "relative", zIndex: 1 }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "center" }}>
+          <div className="about-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "center" }}>
             <div>
               <span style={{ color: "#00d9ff", fontSize: "0.8rem", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase" }}>01. About</span>
-              <h2 className="section-title" style={{ marginTop: "0.5rem" }}>
-                Who Am I<span className="accent">?</span>
-              </h2>
+              <h2 className="section-title" style={{ marginTop: "0.5rem" }}>Who Am I<span className="accent">?</span></h2>
               <p style={{ color: "#8892b0", lineHeight: 1.9, marginTop: "1.5rem", fontSize: "0.95rem" }}>
                 I'm a driven IT undergraduate at <span style={{ color: "#ccd6f6", fontWeight: 600 }}>Sri Lanka Institute of Information Technology (SLIIT)</span>, specialising in Information Technology with a strong focus on software engineering and full-stack development.
               </p>
               <p style={{ color: "#8892b0", lineHeight: 1.9, marginTop: "1rem", fontSize: "0.95rem" }}>
-                My journey spans across building enterprise systems with Java & Spring Boot, crafting seamless user experiences with React & Node.js, and developing native Android apps in Kotlin. I thrive at the intersection of <span style={{ color: "#ccd6f6" }}>elegant design</span> and <span style={{ color: "#ccd6f6" }}>robust engineering</span>.
+                My journey spans across building enterprise systems with Java & Spring Boot, crafting seamless experiences with React & Node.js, and developing native Android apps in Kotlin. I thrive at the intersection of <span style={{ color: "#ccd6f6" }}>elegant design</span> and <span style={{ color: "#ccd6f6" }}>robust engineering</span>.
               </p>
               <p style={{ color: "#8892b0", lineHeight: 1.9, marginTop: "1rem", fontSize: "0.95rem" }}>
-                When I'm not coding, you'll find me on the cricket field 🏏, lost in a game 🎮, or exploring the latest in tech. I believe great software is built by curious minds who never stop learning.
+                When I'm not coding, you'll find me on the cricket field 🏏, gaming 🎮, or exploring the latest in tech.
               </p>
+              <a href="/resume.pdf" download="Tharindu_Thennakoon_Resume.pdf" className="cv-btn" style={{ marginTop: "1.5rem" }}>
+                <DownloadIcon /> Download My Resume
+              </a>
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
               {[
@@ -398,12 +376,7 @@ export default function Portfolio() {
                 { label: "Focus", value: "Full Stack", sub: "Web + Mobile" },
                 { label: "Status", value: "Available", sub: "For Opportunities" },
               ].map((item) => (
-                <div key={item.label} style={{
-                  background: "rgba(0,217,255,0.03)",
-                  border: "1px solid rgba(0,217,255,0.1)",
-                  borderRadius: 12,
-                  padding: "1.5rem",
-                }}>
+                <div key={item.label} style={{ background: "rgba(0,217,255,0.03)", border: "1px solid rgba(0,217,255,0.1)", borderRadius: 12, padding: "1.5rem" }}>
                   <div style={{ color: "#8892b0", fontSize: "0.72rem", textTransform: "uppercase", letterSpacing: "0.1em" }}>{item.label}</div>
                   <div style={{ color: "#00d9ff", fontFamily: "Syne, sans-serif", fontWeight: 700, fontSize: "1.1rem", marginTop: "0.3rem" }}>{item.value}</div>
                   <div style={{ color: "#8892b0", fontSize: "0.78rem", marginTop: "0.2rem" }}>{item.sub}</div>
@@ -414,14 +387,12 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* SKILLS */}
+      {/* ── SKILLS ── */}
       <section id="skills" style={{ padding: "6rem 2rem", position: "relative", zIndex: 1 }} className="dot-pattern">
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "3rem" }}>
             <span style={{ color: "#00d9ff", fontSize: "0.8rem", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase" }}>02. Skills</span>
-            <h2 className="section-title" style={{ marginTop: "0.5rem" }}>
-              Tech I Work With<span className="accent">.</span>
-            </h2>
+            <h2 className="section-title" style={{ marginTop: "0.5rem" }}>Tech I Work With<span className="accent">.</span></h2>
           </div>
           <div className="skills-grid">
             {skills.map((s) => (
@@ -434,14 +405,12 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* PROJECTS */}
+      {/* ── PROJECTS ── */}
       <section id="projects" style={{ padding: "6rem 2rem", position: "relative", zIndex: 1 }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <div style={{ marginBottom: "3rem" }}>
             <span style={{ color: "#00d9ff", fontSize: "0.8rem", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase" }}>03. Projects</span>
-            <h2 className="section-title" style={{ marginTop: "0.5rem" }}>
-              Things I've Built<span className="accent">.</span>
-            </h2>
+            <h2 className="section-title" style={{ marginTop: "0.5rem" }}>Things I've Built<span className="accent">.</span></h2>
           </div>
           <div className="grid-2">
             {projects.map((p) => (
@@ -455,7 +424,6 @@ export default function Portfolio() {
               </div>
             ))}
           </div>
-
           <div style={{ textAlign: "center", marginTop: "3rem" }}>
             <a href="https://github.com/TharinduThennakoon" target="_blank" rel="noreferrer" className="glow-btn">
               View All on GitHub →
@@ -464,22 +432,23 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* CONTACT */}
+      {/* ── CONTACT ── */}
       <section id="contact" style={{ padding: "6rem 2rem", position: "relative", zIndex: 1 }}>
         <div style={{ maxWidth: 700, margin: "0 auto", textAlign: "center" }}>
           <span style={{ color: "#00d9ff", fontSize: "0.8rem", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase" }}>04. Contact</span>
-          <h2 className="section-title" style={{ marginTop: "0.5rem" }}>
-            Let's Work Together<span className="accent">.</span>
-          </h2>
+          <h2 className="section-title" style={{ marginTop: "0.5rem" }}>Let's Work Together<span className="accent">.</span></h2>
           <p style={{ color: "#8892b0", lineHeight: 1.8, marginTop: "1rem", fontSize: "0.95rem" }}>
             Whether you have a project in mind, a collaboration idea, or just want to say hello — my inbox is always open. Let's build something great!
           </p>
-
-          <a href="mailto:tharindu16thennakoon@gmail.com" className="glow-btn" style={{ marginTop: "2.5rem", display: "inline-block", fontSize: "0.95rem", padding: "1rem 2.5rem" }}>
-            Say Hello 👋
-          </a>
-
-          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", marginTop: "2rem", flexWrap: "wrap" }}>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", marginTop: "2.5rem", flexWrap: "wrap" }}>
+            <a href="mailto:tharindu16thennakoon@gmail.com" className="glow-btn" style={{ fontSize: "0.95rem", padding: "1rem 2.5rem" }}>
+              Say Hello 👋
+            </a>
+            <a href="/resume.pdf" download="Tharindu_Thennakoon_Resume.pdf" className="cv-btn pulse-glow" style={{ padding: "1rem 2rem" }}>
+              <DownloadIcon /> Download CV
+            </a>
+          </div>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", marginTop: "1.5rem", flexWrap: "wrap" }}>
             <a href="https://github.com/TharinduThennakoon" target="_blank" rel="noreferrer" className="social-btn">GitHub</a>
             <a href="https://www.linkedin.com/in/tharindu-thennakoon-289110295" target="_blank" rel="noreferrer" className="social-btn">LinkedIn</a>
             <a href="mailto:tharindu16thennakoon@gmail.com" className="social-btn">Email</a>
@@ -487,7 +456,7 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* FOOTER */}
+      {/* ── FOOTER ── */}
       <footer style={{ borderTop: "1px solid rgba(255,255,255,0.05)", padding: "2rem", textAlign: "center", color: "#4a5568", fontSize: "0.82rem", position: "relative", zIndex: 1 }}>
         <span>Designed & Built by </span>
         <span style={{ color: "#00d9ff", fontWeight: 600 }}>Tharindu Thennakoon</span>
